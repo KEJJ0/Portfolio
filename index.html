@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omar Al-Shammari — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --gray:#c0c0c0; --silver:#dfdfdf; --dark:#808080; --darker:#404040;
+  --white:#ffffff; --blue:#000080; --cyan:#008080; --black:#000000; --light:#e8e8e8;
+}
+body { font-family:'Share Tech Mono',monospace; background:var(--gray); min-height:100vh; overflow-x:hidden; cursor:default; user-select:none; }
+body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.025) 2px,rgba(0,0,0,0.025) 4px); pointer-events:none; z-index:9999; }
+
+/* DESKTOP */
+.desktop {
+  min-height:100vh;
+  background-color: #008080;
+  background-image: url("/Images/Windows95.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding:10px; padding-bottom:54px; position:relative;
+}
+
+/* SPLASH */
+#splash { position:fixed; inset:0; background:#000080; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:9998; gap:20px; transition:opacity .8s ease; }
+#splash.out { opacity:0; pointer-events:none; }
+.wlogo { display:grid; grid-template-columns:1fr 1fr; gap:4px; width:64px; height:64px; }
+.wlogo span { display:block; border-radius:1px; }
+.wlogo span:nth-child(1){background:#ff3333;} .wlogo span:nth-child(2){background:#33aa33;}
+.wlogo span:nth-child(3){background:#3333ff;} .wlogo span:nth-child(4){background:#ffff33;}
+.sp-title { font-family:'Press Start 2P',monospace; font-size:clamp(11px,3vw,22px); color:white; text-align:center; text-shadow:3px 3px 0 #000040; line-height:1.7; padding:0 20px; }
+.sp-sub { font-family:'VT323',monospace; font-size:22px; color:#aaddff; }
+.lw { width:min(380px,80vw); background:#000040; border:2px solid #6666ff; padding:4px; }
+.lb { height:18px; width:0%; background:repeating-linear-gradient(90deg,#0000cc 0,#0000cc 10px,#2222ff 10px,#2222ff 12px); animation:bp .6s infinite alternate; transition:width .1s; }
+@keyframes bp{from{opacity:.8}to{opacity:1}}
+.lm { font-family:'Share Tech Mono',monospace; font-size:13px; color:#8899ff; margin-top:-4px; }
+
+/* TASKBAR */
+.taskbar { position:fixed; bottom:0; left:0; right:0; height:42px; background:var(--gray); border-top:2px solid var(--white); display:flex; align-items:center; padding:0 4px; gap:4px; z-index:2000; }
+.start-btn { display:flex; align-items:center; gap:5px; padding:4px 10px; background:var(--gray); border-top:2px solid var(--white); border-left:2px solid var(--white); border-right:2px solid var(--darker); border-bottom:2px solid var(--darker); font-family:'Press Start 2P',monospace; font-size:8px; font-weight:bold; cursor:pointer; color:var(--black); flex-shrink:0; }
+.start-btn:active { border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); }
+.wls { display:grid; grid-template-columns:1fr 1fr; gap:1px; width:18px; height:18px; }
+.wls span:nth-child(1){background:#ff3333;} .wls span:nth-child(2){background:#33aa33;}
+.wls span:nth-child(3){background:#3333ff;} .wls span:nth-child(4){background:#ffff33;}
+.tbsep { width:1px; background:var(--dark); height:30px; flex-shrink:0; }
+.tbitems { display:flex; gap:3px; flex:1; overflow:hidden; }
+.tbi { padding:3px 10px; font-size:11px; cursor:pointer; color:var(--black); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:140px; border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); }
+.tbi:hover { background:var(--silver); }
+.tbi.act { background:var(--light); }
+.tbclock { margin-left:auto; padding:3px 10px; border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); font-size:12px; min-width:75px; text-align:center; color:var(--black); flex-shrink:0; }
+
+/* DESKTOP ICONS */
+.icons-col { position:absolute; top:10px; left:10px; display:flex; flex-direction:column; gap:10px; }
+.dicon { display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; width:74px; text-align:center; transition:transform .18s cubic-bezier(.34,1.56,.64,1); }
+.dicon:hover { transform:scale(1.12); }
+.dicon:active { transform:scale(.92); }
+.dic-wrap { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; box-shadow:0 4px 16px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.2); transition:box-shadow .18s,transform .18s; position:relative; overflow:hidden; }
+.dic-wrap::after { content:''; position:absolute; top:0; left:0; right:0; height:48%; background:linear-gradient(rgba(255,255,255,.18),transparent); border-radius:14px 14px 0 0; pointer-events:none; }
+.dicon:hover .dic-wrap { box-shadow:0 8px 24px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.25), 0 0 20px rgba(120,100,255,.3); }
+.dlabel { font-size:11px; color:#dde8ff; text-shadow:0 1px 4px #000, 0 0 10px rgba(0,0,60,.9); line-height:1.3; font-family:'Share Tech Mono',monospace; font-weight:bold; }
+.dicon:hover .dlabel { color:#fff; }
+/* Icon color themes matching screenshot */
+.dic-purple { background:linear-gradient(145deg,#9b6fd0,#5c2e90); }
+.dic-orange { background:linear-gradient(145deg,#f09020,#c06000); }
+.dic-yellow { background:linear-gradient(145deg,#e0b020,#a07800); }
+.dic-pink   { background:linear-gradient(145deg,#d04888,#901858); }
+.dic-blue   { background:linear-gradient(145deg,#3878e8,#1848b8); }
+
+/* WINDOW */
+.win { background:var(--gray); border-top:2px solid var(--white); border-left:2px solid var(--white); border-right:2px solid var(--darker); border-bottom:2px solid var(--darker); box-shadow:3px 3px 0 rgba(0,0,0,.35); position:absolute; overflow:hidden; transition:opacity .2s ease,transform .25s cubic-bezier(.34,1.56,.64,1); }
+.win.hidden { opacity:0; transform:scale(.75) translateY(30px); pointer-events:none; }
+.win.show { opacity:1; transform:scale(1) translateY(0); }
+
+/* TITLE BAR */
+.tb { background:linear-gradient(to right,#000080,#1084d0); color:white; padding:3px 5px; display:flex; align-items:center; justify-content:space-between; font-size:12px; font-weight:bold; cursor:move; min-height:22px; font-family:'Share Tech Mono',monospace; user-select:none; }
+.tbl { display:flex; align-items:center; gap:5px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+.tbr { display:flex; gap:2px; flex-shrink:0; }
+.wbtn { width:16px; height:14px; background:var(--gray); border-top:1px solid var(--white); border-left:1px solid var(--white); border-right:1px solid var(--darker); border-bottom:1px solid var(--darker); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--black); font-family:monospace; }
+.wbtn:hover { background:#e0e0e0; }
+.wbtn:active { border-top:1px solid var(--darker); border-left:1px solid var(--darker); border-right:1px solid var(--white); border-bottom:1px solid var(--white); }
+.wbtn.x:hover { background:#cc0000; color:white; }
+
+/* MENU BAR */
+.mbar { background:var(--gray); border-bottom:1px solid var(--dark); padding:2px 4px; display:flex; gap:1px; font-size:12px; }
+.mi { padding:2px 8px; cursor:pointer; color:var(--black); }
+.mi:hover { background:var(--blue); color:white; }
+
+/* CONTENT */
+.wc { padding:12px; overflow-y:auto; }
+
+/* STATUS BAR */
+.sbar { background:var(--gray); border-top:1px solid var(--dark); padding:2px 6px; font-size:11px; display:flex; gap:6px; color:var(--black); }
+.sp { border-top:1px solid var(--dark); border-left:1px solid var(--dark); border-right:1px solid var(--white); border-bottom:1px solid var(--white); padding:1px 6px; flex:1; font-size:10px; }
+
+hr.wd { border:none; border-top:1px solid var(--dark); border-bottom:1px solid var(--white); margin:10px 0; }
+
+.sh { font-family:'Press Start 2P',monospace; font-size:8px; color:var(--blue); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.sh::after { content:''; flex:1; height:1px; background:var(--darker); }
+
+.box3d { border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); }
+.box3do { border-top:2px solid var(--white); border-left:2px solid var(--white); border-right:2px solid var(--darker); border-bottom:2px solid var(--darker); }
+
+/* BUTTONS */
+.wbig { padding:5px 14px; background:var(--gray); border-top:2px solid var(--white); border-left:2px solid var(--white); border-right:2px solid var(--darker); border-bottom:2px solid var(--darker); cursor:pointer; font-family:'Share Tech Mono',monospace; font-size:12px; color:var(--black); display:inline-flex; align-items:center; gap:5px; text-decoration:none; transition:background .08s; }
+.wbig:hover { background:var(--silver); }
+.wbig:active { border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); }
+
+.sbtn { padding:7px 14px; background:var(--gray); border-top:2px solid var(--white); border-left:2px solid var(--white); border-right:2px solid var(--darker); border-bottom:2px solid var(--darker); cursor:pointer; font-family:'Share Tech Mono',monospace; font-size:12px; color:var(--black); display:flex; align-items:center; gap:8px; text-decoration:none; width:100%; transition:all .1s; }
+.sbtn:hover { background:var(--blue); color:white; }
+.sbtn:active { border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); }
+
+/* MARQUEE */
+.mqw { background:#000; color:#00ff41; padding:4px 0; overflow:hidden; white-space:nowrap; }
+.mqi { display:inline-block; animation:mq 28s linear infinite; }
+@keyframes mq{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}
+
+/* SKILL BARS */
+.skrow { margin-bottom:10px; }
+.sklbl { display:flex; justify-content:space-between; font-size:12px; margin-bottom:3px; color:var(--black); }
+.sktrk { height:16px; background:white; border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); position:relative; overflow:hidden; }
+.skfill { height:100%; background:repeating-linear-gradient(90deg,#000080 0,#000080 10px,#0000aa 10px,#0000aa 12px); transition:width 1.2s ease; }
+
+/* PROJECT CARDS */
+.proj { margin-bottom:10px; overflow:hidden; border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); transition:transform .2s ease,box-shadow .2s ease; }
+.proj:hover { transform:translate(-2px,-2px); box-shadow:4px 4px 0 var(--darker); }
+.pjh { background:linear-gradient(to right,#008080,#006060); color:white; padding:4px 10px; font-size:12px; font-weight:bold; display:flex; align-items:center; gap:6px; }
+.pjb { padding:10px; background:var(--gray); }
+.pjb p { font-size:12px; color:var(--black); line-height:1.7; margin-bottom:8px; }
+.tags { display:flex; flex-wrap:wrap; gap:4px; }
+.tag { background:var(--blue); color:white; padding:1px 7px; font-size:10px; font-family:'Share Tech Mono',monospace; }
+
+/* INPUT */
+.winput { width:100%; padding:4px 6px; background:white; border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); font-family:'Share Tech Mono',monospace; font-size:12px; margin-bottom:8px; color:var(--black); outline:none; }
+.winput:focus { outline:1px dotted var(--black); outline-offset:-3px; }
+textarea.winput { min-height:75px; resize:vertical; }
+
+.blink { animation:bl 1s step-end infinite; }
+@keyframes bl{0%,100%{opacity:1}50%{opacity:0}}
+
+/* DIALOG */
+#dlg { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:9000; background:rgba(0,0,0,.3); opacity:0; pointer-events:none; transition:opacity .2s; }
+#dlg.show { opacity:1; pointer-events:all; }
+.dlgbox { background:var(--gray); border-top:2px solid var(--white); border-left:2px solid var(--white); border-right:2px solid var(--darker); border-bottom:2px solid var(--darker); min-width:280px; max-width:380px; transform:scale(.8); transition:transform .3s cubic-bezier(.34,1.56,.64,1); }
+#dlg.show .dlgbox { transform:scale(1); }
+.dlgb { padding:18px; display:flex; gap:14px; align-items:flex-start; }
+.dlgic { font-size:30px; flex-shrink:0; }
+.dlgtx { font-size:13px; line-height:1.7; color:var(--black); }
+.dlgft { display:flex; justify-content:center; gap:8px; padding:10px; border-top:1px solid var(--dark); }
+
+/* CONTEXT MENU */
+#ctx { position:fixed; background:var(--gray); border-top:2px solid var(--white); border-left:2px solid var(--white); border-right:2px solid var(--darker); border-bottom:2px solid var(--darker); z-index:7000; min-width:170px; display:none; box-shadow:3px 3px 0 rgba(0,0,0,.4); }
+#ctx.show { display:block; }
+.ci { padding:4px 20px; font-size:12px; cursor:pointer; color:var(--black); display:flex; align-items:center; gap:8px; }
+.ci:hover { background:var(--blue); color:white; }
+.cd { border-top:1px solid var(--dark); border-bottom:1px solid var(--white); margin:3px 2px; }
+
+::-webkit-scrollbar{width:16px;}
+::-webkit-scrollbar-track{background:var(--gray);}
+::-webkit-scrollbar-thumb{background:var(--gray);border-top:1px solid var(--white);border-left:1px solid var(--white);border-right:1px solid var(--darker);border-bottom:1px solid var(--darker);}
+
+/* PIXEL AVATAR */
+.pxav { width:80px; height:80px; background:linear-gradient(135deg,#000080,#008080); border-top:2px solid var(--darker); border-left:2px solid var(--darker); border-right:2px solid var(--white); border-bottom:2px solid var(--white); display:flex; align-items:center; justify-content:center; font-size:46px; flex-shrink:0; }
+
+/* ADDRESS BAR */
+.abar { background:var(--light); padding:4px 8px; border-bottom:1px solid var(--dark); display:flex; align-items:center; gap:6px; font-size:11px; }
+.ainput { flex:1; background:white; padding:1px 6px; border-top:1px solid var(--dark); border-left:1px solid var(--dark); border-right:1px solid var(--white); border-bottom:1px solid var(--white); font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--black); outline:none; }
+
+/* WINDOW DEFAULT POSITIONS */
+#wm  { width:min(680px,calc(100vw - 90px)); top:16px; right:16px; }
+#wa  { width:min(440px,calc(100vw - 90px)); top:50px; right:50%; transform:translateX(50%); }
+#wsk { width:min(480px,calc(100vw - 90px)); top:70px; left:90px; }
+#wp  { width:min(640px,calc(100vw - 90px)); top:30px; left:90px; }
+#wc  { width:min(400px,calc(100vw - 90px)); top:50px; right:16px; }
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  #wm  { width:min(620px,calc(100vw - 70px)); }
+  #wp  { width:min(580px,calc(100vw - 70px)); }
+}
+@media(max-width:768px){
+  .icons-col { left:4px; gap:8px; }
+  .dicon { width:64px; }
+  .dic-wrap { width:44px; height:44px; font-size:22px; }
+  .dlabel { font-size:10px; }
+  #wm  { width:calc(100vw - 8px) !important; left:4px !important; right:4px !important; top:8px !important; transform:none !important; }
+  #wa  { width:calc(100vw - 8px) !important; left:4px !important; right:4px !important; top:8px !important; transform:none !important; }
+  #wsk { width:calc(100vw - 8px) !important; left:4px !important; right:4px !important; top:8px !important; transform:none !important; }
+  #wp  { width:calc(100vw - 8px) !important; left:4px !important; right:4px !important; top:8px !important; transform:none !important; }
+  #wc  { width:calc(100vw - 8px) !important; left:4px !important; right:4px !important; top:8px !important; transform:none !important; }
+  .wc { max-height:52vh !important; }
+  .sp-title { font-size:clamp(8px,3vw,14px) !important; }
+  .pxav-img { width:70px !important; height:70px !important; }
+  .wbig { font-size:11px; padding:4px 10px; }
+  .tbi { max-width:110px; font-size:10px; }
+}
+@media(max-width:600px){
+  .icons-col { left:3px; gap:6px; }
+  .dicon { width:58px; }
+  .dic-wrap { width:40px; height:40px; font-size:20px; }
+  .dlabel { font-size:9px; }
+  #wm, #wa, #wsk, #wp, #wc { width:calc(100vw - 6px) !important; left:3px !important; right:3px !important; top:6px !important; transform:none !important; }
+  .wc { max-height:55vh !important; padding:8px !important; }
+  .pxav-img { width:64px !important; height:64px !important; }
+  .mbar { font-size:11px; flex-wrap:wrap; }
+  .mi { padding:2px 5px; }
+  .sh { font-size:7px; }
+  .skrow { margin-bottom:7px; }
+  .sklbl { font-size:11px; }
+  .proj { margin-bottom:8px; }
+  .pjh { font-size:11px; }
+  .pjb p { font-size:11px; }
+  .taskbar { height:38px; }
+  .start-btn { font-size:8px; padding:3px 8px; }
+  .tbclock { min-width:60px; font-size:11px; padding:3px 6px; }
+  .taskbar { padding: 0 3px; gap:3px; }
+  table { font-size:11px !important; }
+  .winput { font-size:11px; }
+  .wbig { font-size:10px; padding:3px 8px; }
+  .box3d div[style*="font-size:14px"] { font-size:12px !important; }
+}
+@media(max-width:400px){
+  .icons-col { left:2px; gap:4px; }
+  .dicon { width:52px; }
+  .dic-wrap { width:36px; height:36px; font-size:18px; border-radius:10px; }
+  .dlabel { font-size:8px; }
+  #wm, #wa, #wsk, #wp, #wc { width:calc(100vw - 4px) !important; left:2px !important; right:2px !important; top:4px !important; }
+  .wc { max-height:60vh !important; padding:6px !important; }
+  .pxav-img { width:56px !important; height:56px !important; }
+  .start-btn { font-size:7px; padding:3px 6px; }
+  .tbclock { min-width:50px; font-size:10px; padding:3px 4px; }
+  .taskbar { height:36px; }
+  .sp-title { font-size:8px !important; }
+  .wbig { font-size:9px; padding:3px 6px; }
+}
+@media(min-width:1400px){
+  #wm  { width:min(720px,calc(100vw - 120px)); }
+  #wp  { width:min(700px,calc(100vw - 120px)); }
+  #wsk { width:min(520px,calc(100vw - 120px)); }
+  #wa  { width:min(480px,calc(100vw - 120px)); }
+  #wc  { width:min(440px,calc(100vw - 120px)); }
+}
+
+/* START MENU */
+#startmenu {
+  position:fixed; bottom:42px; left:0; width:220px;
+  background:var(--gray);
+  border-top:2px solid var(--white); border-left:2px solid var(--white);
+  border-right:2px solid var(--darker); border-bottom:2px solid var(--darker);
+  box-shadow:3px 3px 6px rgba(0,0,0,.5);
+  z-index:5000; display:none; flex-direction:row; overflow:hidden;
+}
+#startmenu.show { display:flex; }
+.sm-sidebar {
+  background:linear-gradient(to bottom,#1084d0,#000080);
+  width:28px; display:flex; align-items:flex-end; justify-content:center;
+  padding-bottom:6px;
+}
+.sm-sidebar span {
+  font-family:'Press Start 2P',monospace; font-size:7px; color:rgba(255,255,255,.55);
+  writing-mode:vertical-rl; transform:rotate(180deg); letter-spacing:2px;
+  white-space:nowrap;
+}
+.sm-items { flex:1; padding:4px 0; }
+.sm-item {
+  display:flex; align-items:center; gap:8px;
+  padding:6px 10px; cursor:pointer; font-size:12px; color:var(--black);
+  font-family:'Share Tech Mono',monospace; white-space:nowrap;
+}
+.sm-item:hover { background:var(--blue); color:white; }
+.sm-divider { border-top:1px solid var(--dark); border-bottom:1px solid var(--white); margin:3px 2px; }
+.sm-item .sm-icon { font-size:16px; flex-shrink:0; }
+
+/* PROFILE IMAGE IN MAIN WINDOW */
+.pxav-img {
+  width:80px; height:80px;
+  border-top:2px solid var(--darker); border-left:2px solid var(--darker);
+  border-right:2px solid var(--white); border-bottom:2px solid var(--white);
+  flex-shrink:0; overflow:hidden; position:relative;
+  background:linear-gradient(135deg,#0d0d2e 0%,#1a1a4e 40%,#000080 100%);
+  display:flex; align-items:center; justify-content:center;
+}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="wlogo"><span></span><span></span><span></span><span></span></div>
+  <div class="sp-title">Omar Al-Shammari<br><span style="font-size:.55em;color:#88bbff;">Portfolio v1.0</span></div>
+  <div class="sp-sub">Initializing workspace...</div>
+  <div class="lw"><div class="lb" id="lbar"></div></div>
+  <div class="lm" id="lmsg">Loading system components...</div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#5566bb;margin-top:4px;">Copyright © 2025 Omar Al-Shammari</div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div id="ctx">
+  <div class="ci" onclick="openWin('wm')">🖥 Main Portfolio</div>
+  <div class="ci" onclick="openWin('wa')">👤 About Me</div>
+  <div class="ci" onclick="openWin('wsk')">⚡ Skills</div>
+  <div class="ci" onclick="openWin('wp')">📁 Projects</div>
+  <div class="ci" onclick="openWin('wc')">📧 Contact</div>
+  <div class="cd"></div>
+  <div class="ci" onclick="showDlg('info')">ℹ️ About This Page</div>
+</div>
+
+<!-- DESKTOP -->
+<div class="desktop" id="desk">
+
+  <!-- Icons -->
+  <div class="icons-col">
+
+    <!-- About Me — purple person (matches screenshot) -->
+    <div class="dicon" ondblclick="openWin('wa')">
+      <div class="dic-wrap dic-purple">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <circle cx="15" cy="10" r="6" fill="rgba(255,255,255,0.9)"/>
+          <path d="M4 26c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="dlabel">About Me</div>
+    </div>
+
+    <!-- Skills — orange/yellow lightning (matches screenshot) -->
+    <div class="dicon" ondblclick="openWin('wsk')">
+      <div class="dic-wrap dic-orange">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <polygon points="18,2 8,16 14,16 12,28 22,14 16,14" fill="rgba(255,220,80,1)" stroke="rgba(255,255,150,0.6)" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <div class="dlabel">Skills.exe</div>
+    </div>
+
+    <!-- Projects — yellow folder (matches screenshot) -->
+    <div class="dicon" ondblclick="openWin('wp')">
+      <div class="dic-wrap dic-yellow">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <rect x="2" y="10" width="26" height="17" rx="2" fill="rgba(255,255,255,0.25)"/>
+          <rect x="2" y="9" width="26" height="18" rx="2" fill="rgba(255,255,255,0.15)"/>
+          <path d="M2 13h26v14a2 2 0 01-2 2H4a2 2 0 01-2-2V13z" fill="rgba(255,255,255,0.85)"/>
+          <rect x="2" y="10" width="10" height="5" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+        </svg>
+      </div>
+      <div class="dlabel">My Projects</div>
+    </div>
+
+    <!-- Contact — pink @ (matches screenshot) -->
+    <div class="dicon" ondblclick="openWin('wc')">
+      <div class="dic-wrap dic-pink">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <circle cx="15" cy="15" r="9" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" fill="none"/>
+          <circle cx="15" cy="15" r="4" fill="rgba(255,255,255,0.9)"/>
+          <path d="M24 15c0 3.5 1.5 6 0 7.5" stroke="rgba(255,255,255,0.9)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="dlabel">Contact</div>
+    </div>
+
+    <!-- Read Me — blue info (matches screenshot) -->
+    <div class="dicon" ondblclick="showDlg('info')">
+      <div class="dic-wrap dic-blue">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <circle cx="15" cy="15" r="12" stroke="rgba(255,255,255,0.85)" stroke-width="2" fill="none"/>
+          <rect x="13.5" y="13" width="3" height="9" rx="1.2" fill="rgba(255,255,255,0.9)"/>
+          <circle cx="15" cy="9.5" r="1.8" fill="rgba(255,255,255,0.9)"/>
+        </svg>
+      </div>
+      <div class="dlabel">Read Me</div>
+    </div>
+
+  </div>
+
+  <!-- ══ MAIN WINDOW ══ -->
+  <div class="win hidden" id="wm" style="z-index:100;">
+    <div class="tb" onmousedown="dStart(event,'wm')" ontouchstart="dStartT(event,'wm')">
+      <div class="tbl"><span>🖥</span><span>My Portfolio — Omar Al-Shammari</span></div>
+      <div class="tbr">
+        <div class="wbtn" onclick="minWin('wm')">_</div>
+        <div class="wbtn">□</div>
+        <div class="wbtn x" onclick="closeWin('wm')">✕</div>
+      </div>
+    </div>
+    <div class="mbar">
+      <div class="mi" onclick="openWin('wa')">Profile</div>
+      <div class="mi" onclick="openWin('wsk')">Skills</div>
+      <div class="mi" onclick="openWin('wp')">Projects</div>
+      <div class="mi" onclick="openWin('wc')">Contact</div>
+      <div class="mi" onclick="showDlg('info')">Help</div>
+    </div>
+    <div class="mqw">
+      <span class="mqi">★ مرحباً — Omar Al-Shammari ★  أمن سيبراني ومطور ويب ★ Cybersecurity  & Web Developer ★ Available for Opportunities ★ Saudi Arabia 🇸🇦 ★</span>
+    </div>
+    <div class="wc" style="max-height:58vh;">
+      <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;">
+        <div class="pxav-img">
+          <img src=Images/Me.png alt="Omar Al-Shammari" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <div style="font-family:'Press Start 2P',monospace;font-size:clamp(8px,1.8vw,12px);color:var(--black);margin-bottom:8px;line-height:1.8;">Omar Al-Shammari<span class="blink">_</span></div>
+          <div style="font-size:12px;color:var(--darker);line-height:2.1;">
+            <div>🎓 Cybersecurity Student</div>
+            <div>💻 Web Developer</div>
+            <div>📍 Saudi Arabia 🇸🇦</div>
+            <div style="color:#008000;font-weight:bold;">● Available for Work</div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <button class="wbig" onclick="openWin('wa')">👤 About</button>
+            <button class="wbig" onclick="openWin('wsk')">⚡ Skills</button>
+            <button class="wbig" onclick="openWin('wp')">📁 Projects</button>
+            <button class="wbig" onclick="openWin('wc')">📧 Contact</button>
+          </div>
+        </div>
+      </div>
+
+      <hr class="wd">
+      <div class="sh">SYSTEM STATS</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-bottom:12px;">
+        <div class="box3d" style="padding:8px;text-align:center;background:var(--gray);">
+          <div style="font-family:'Press Start 2P',monospace;font-size:14px;color:#000080;">3+</div>
+          <div style="font-size:10px;color:var(--darker);">Years Dev</div>
+        </div>
+        <div class="box3d" style="padding:8px;text-align:center;background:var(--gray);">
+          <div style="font-family:'Press Start 2P',monospace;font-size:14px;color:#000080;">20+</div>
+          <div style="font-size:10px;color:var(--darker);">Projects</div>
+        </div>
+        <div class="box3d" style="padding:8px;text-align:center;background:var(--gray);">
+          <div style="font-family:'Press Start 2P',monospace;font-size:14px;color:#000080;">🔐</div>
+          <div style="font-size:10px;color:var(--darker);">CyberSec</div>
+        </div>
+        <div class="box3d" style="padding:8px;text-align:center;background:var(--gray);">
+          <div style="font-family:'Press Start 2P',monospace;font-size:14px;color:#000080;">∞</div>
+          <div style="font-size:10px;color:var(--darker);">Passion</div>
+        </div>
+      </div>
+
+      <hr class="wd">
+      <div class="sh">QUICK LINKS</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <a class="wbig" href="https://www.linkedin.com/in/omar-mohammed-20b4772b8" target="_blank" rel="noopener">🔵 LinkedIn</a>
+        <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener">🐙 GitHub</a>
+        <a class="wbig" href="https://x.com/PO_ET9" target="_blank" rel="noopener">🐦 X / Twitter</a>
+        <a class="wbig" href="/cdn-cgi/l/email-protection#e9868688859a81888484889b80d8a98e84888085c78a8684">📧 Email</a>
+        <a class="wbig" href="https://wa.me/966552465989" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="sbar">
+      <div class="sp">Ready</div>
+      <div class="sp">Omar Al-Shammari © 2025</div>
+      <div class="sp" style="flex:none;min-width:75px;text-align:center;" id="wclock"></div>
+    </div>
+  </div>
+
+  <!-- ══ ABOUT WINDOW ══ -->
+  <div class="win hidden" id="wa" style="z-index:99;">
+    <div class="tb" onmousedown="dStart(event,'wa')" ontouchstart="dStartT(event,'wa')">
+      <div class="tbl"><span>👤</span><span>About Me — User Profile</span></div>
+      <div class="tbr">
+        <div class="wbtn" onclick="minWin('wa')">_</div>
+        <div class="wbtn">□</div>
+        <div class="wbtn x" onclick="closeWin('wa')">✕</div>
+      </div>
+    </div>
+    <div class="wc" style="max-height:60vh;">
+      <div class="sh">BIOGRAPHY.TXT</div>
+      <div class="box3d" style="background:white;padding:12px;font-size:12px;line-height:1.9;color:#000;margin-bottom:12px;">
+       Welcome to my profile! <br> I’m a Cybersecurity and developer driven by curiosity and a passion for solving digital challenges. <br> I enjoy turning complex problems into secure, efficient, and creative solutions.
+
+
+      </div>
+
+      <div class="sh">PROPERTIES</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse;">
+        <tr><td style="padding:5px 8px;color:var(--darker);width:42%;">Name:</td><td style="padding:5px 8px;color:#000;">Omar Al-Shammari</td></tr>
+        <tr style="background:#e8e8e8;"><td style="padding:5px 8px;color:var(--darker);">Location:</td><td style="padding:5px 8px;color:#000;">Saudi Arabia 🇸🇦</td></tr>
+        <tr><td style="padding:5px 8px;color:var(--darker);">Major:</td><td style="padding:5px 8px;color:#000;">Cybersecurity</td></tr>
+        <tr style="background:#e8e8e8;"><td style="padding:5px 8px;color:var(--darker);">Skill:</td><td style="padding:5px 8px;color:#000;">Web Development</td></tr>
+        <tr><td style="padding:5px 8px;color:var(--darker);">Email:</td><td style="padding:5px 8px;"><a href="/cdn-cgi/l/email-protection#bad5d5dbd6c9d2dbd7d7dbc8d38bfaddd7dbd3d694d9d5d7" style="color:#000080;text-decoration:none;"><span class="__cf_email__" data-cfemail="d8b7b7b9b4abb0b9b5b5b9aab1e998bfb5b9b1b4f6bbb7b5">[email&#160;protected]</span></a></td></tr>
+        <tr style="background:#e8e8e8;"><td style="padding:5px 8px;color:var(--darker);">Phone:</td><td style="padding:5px 8px;"><a href="tel:+966552465989" style="color:#000080;text-decoration:none;">+966 55 246 5989</a></td></tr>
+        <tr><td style="padding:5px 8px;color:var(--darker);">Status:</td><td style="padding:5px 8px;color:#008000;font-weight:bold;">● Available for Work</td></tr>
+      </table>
+
+      <div style="margin-top:14px;display:flex;gap:6px;justify-content:flex-end;">
+        <button class="wbig" onclick="openWin('wc')">📧 Hire Me</button>
+        <button class="wbig" onclick="closeWin('wa')">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SKILLS WINDOW ══ -->
+  <div class="win hidden" id="wsk" style="z-index:98;">
+    <div class="tb" onmousedown="dStart(event,'wsk')" ontouchstart="dStartT(event,'wsk')">
+      <div class="tbl"><span>⚡</span><span>Skills.exe — Capability Manager</span></div>
+      <div class="tbr">
+        <div class="wbtn" onclick="minWin('wsk')">_</div>
+        <div class="wbtn">□</div>
+        <div class="wbtn x" onclick="closeWin('wsk')">✕</div>
+      </div>
+    </div>
+    <div class="mbar"><div class="mi">View</div><div class="mi">Sort</div><div class="mi">Filter</div></div>
+    <div class="wc" style="max-height:58vh;">
+      <div class="sh">WEB DEVELOPMENT</div>
+      <div class="skrow"><div class="sklbl"><span>HTML / CSS</span><span>90%</span></div><div class="sktrk"><div class="skfill" style="width:90%"></div></div></div>
+      <div class="skrow"><div class="sklbl"><span>JavaScript</span><span>80%</span></div><div class="sktrk"><div class="skfill" style="width:80%"></div></div></div>
+      <div class="skrow"><div class="sklbl"><span>React.js</span><span>70%</span></div><div class="sktrk"><div class="skfill" style="width:70%"></div></div></div>
+      <div class="skrow"><div class="sklbl"><span>Node.js / Express</span><span>65%</span></div><div class="sktrk"><div class="skfill" style="width:65%"></div></div></div>
+      <div class="skrow"><div class="sklbl"><span>SQL / MongoDB</span><span>60%</span></div><div class="sktrk"><div class="skfill" style="width:60%"></div></div></div>
+
+      <hr class="wd">
+      <div class="sh">CYBERSECURITY</div>
+      <div class="skrow"><div class="sklbl"><span>Network Security</span><span>75%</span></div><div class="sktrk"><div class="skfill" style="width:75%"></div></div></div>
+      <div class="skrow"><div class="sklbl"><span>Linux / Kali Linux</span><span>72%</span></div><div class="sktrk"><div class="skfill" style="width:72%"></div></div></div>
+      <div class="skrow"><div class="sklbl"><span>Penetration Testing</span><span>65%</span></div><div class="sktrk"><div class="skfill" style="width:65%"></div></div></div>
+      <div class="skrow"><div class="sklbl"><span>OWASP / Web Security</span><span>68%</span></div><div class="sktrk"><div class="skfill" style="width:68%"></div></div></div>
+      <div class="skrow"><div class="sklbl"><span>Python Scripting</span><span>70%</span></div><div class="sktrk"><div class="skfill" style="width:70%"></div></div></div>
+
+      <hr class="wd">
+      <div class="sh">TOOLS</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="tag" style="padding:3px 10px;">Git</span>
+        <span class="tag" style="padding:3px 10px;">VS Code</span>
+        <span class="tag" style="padding:3px 10px;">Wireshark</span>
+        <span class="tag" style="padding:3px 10px;">Burp Suite</span>
+        <span class="tag" style="padding:3px 10px;">Nmap</span>
+        <span class="tag" style="padding:3px 10px;">Docker</span>
+        <span class="tag" style="padding:3px 10px;">Figma</span>
+        <span class="tag" style="padding:3px 10px;">Metasploit</span>
+      </div>
+    </div>
+    <div class="sbar"><div class="sp">10 skills loaded</div><div class="sp">All systems OK</div></div>
+  </div>
+
+  <!-- ══ PROJECTS WINDOW ══ -->
+  <div class="win hidden" id="wp" style="z-index:97;">
+    <div class="tb" onmousedown="dStart(event,'wp')" ontouchstart="dStartT(event,'wp')">
+      <div class="tbl"><span>📁</span><span>My Projects — File Explorer</span></div>
+      <div class="tbr">
+        <div class="wbtn" onclick="minWin('wp')">_</div>
+        <div class="wbtn">□</div>
+        <div class="wbtn x" onclick="closeWin('wp')">✕</div>
+      </div>
+    </div>
+    <div class="mbar"><div class="mi">File</div><div class="mi">Edit</div><div class="mi">View</div><div class="mi">Go</div><div class="mi">Help</div></div>
+    <div class="abar">
+      <button class="wbig" style="padding:1px 6px;font-size:10px;">◄</button>
+      <button class="wbig" style="padding:1px 6px;font-size:10px;">►</button>
+      <div class="ainput">C:\Users\Omar\Projects\</div>
+      <button class="wbig" style="padding:1px 6px;font-size:10px;">Go</button>
+    </div>
+    <div class="wc" style="max-height:55vh;">
+      <div class="proj">
+        <div class="pjh">🔐 Data Loss Prevention (حصين)</div>
+        <div class="pjb">
+          <p>تطبيق لمنع فقدان البيانات من خلال كشف الأنظمة والتنبيهات التلقائية.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Fingerprinting / Exact Data Matching</span><span class="tag">C#</span><span class="tag">Data Classification</span> <span class="tag">Endpoint Protection</span></div>
+          <div style="margin-top:8px;display:flex;gap:6px;">
+            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;">🐙 GitHub</a>
+            <button class="wbig" onclick="showDlg('p1')" style="font-size:10px;padding:3px 8px;">📄 Details</button>
+          </div>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="pjh">🌐 Portfolio Website</div>
+        <div class="pjb">
+          <p>موقع بورتفوليو شخصي تفاعلي متجاوب مبني بـ HTML وCSS وJS خالص بدون أي framework.</p>
+          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          <div style="margin-top:8px;display:flex;gap:6px;">
+            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;">🐙 GitHub</a>
+            <button class="wbig" onclick="showDlg('p2')" style="font-size:10px;padding:3px 8px;">📄 Details</button>
+          </div>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="pjh">📡 Network Monitoring Dashboard</div>
+        <div class="pjb">
+          <p>لوحة مراقبة حركة الشبكة في الوقت الفعلي مع كشف الأجهزة وتحليل البروتوكولات والتنبيهات.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">React</span><span class="tag">WebSocket</span><span class="tag">Wireshark</span></div>
+          <div style="margin-top:8px;display:flex;gap:6px;">
+            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;">🐙 GitHub</a>
+            <button class="wbig" onclick="showDlg('p3')" style="font-size:10px;padding:3px 8px;">📄 Details</button>
+          </div>
+        </div>
+      </div>
+      <div class="proj">
+        <div class="pjh">🛒 E-Commerce Web App</div>
+        <div class="pjb">
+          <p>تطبيق تجارة إلكترونية متكامل بنظام مصادقة JWT وإدارة المنتجات وسلة التسوق وبوابة الدفع.</p>
+          <div class="tags"><span class="tag">Node.js</span><span class="tag">React</span><span class="tag">MongoDB</span><span class="tag">JWT</span></div>
+          <div style="margin-top:8px;display:flex;gap:6px;">
+            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;">🐙 GitHub</a>
+            <button class="wbig" onclick="showDlg('p4')" style="font-size:10px;padding:3px 8px;">📄 Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sbar"><div class="sp">4 object(s)</div><div class="sp">C:\Users\Omar\Projects</div></div>
+  </div>
+
+  <!-- ══ CONTACT WINDOW ══ -->
+  <div class="win hidden" id="wc" style="z-index:96;">
+    <div class="tb" onmousedown="dStart(event,'wc')" ontouchstart="dStartT(event,'wc')">
+      <div class="tbl"><span>📧</span><span>Contact — Omar Al-Shammari</span></div>
+      <div class="tbr">
+        <div class="wbtn" onclick="minWin('wc')">_</div>
+        <div class="wbtn">□</div>
+        <div class="wbtn x" onclick="closeWin('wc')">✕</div>
+      </div>
+    </div>
+    <div class="mbar"><div class="mi">File</div><div class="mi">Edit</div><div class="mi">Insert</div></div>
+    <div class="wc" style="max-height:62vh;">
+      <div class="sh">SOCIAL LINKS</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
+        <a class="sbtn" href="https://www.linkedin.com/in/omar-mohammed-20b4772b8" target="_blank" rel="noopener">
+          <span style="font-size:15px;">🔵</span>
+          <span style="font-weight:bold;">LinkedIn</span>
+          <span style="font-size:10px;opacity:.65;margin-left:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">omar-mohammed-20b4772b8</span>
+        </a>
+        <a class="sbtn" href="https://github.com/KEJJ0" target="_blank" rel="noopener">
+          <span style="font-size:15px;">🐙</span>
+          <span style="font-weight:bold;">GitHub</span>
+          <span style="font-size:10px;opacity:.65;margin-left:auto;">github.com/KEJJ0</span>
+        </a>
+        <a class="sbtn" href="https://x.com/PO_ET9" target="_blank" rel="noopener">
+          <span style="font-size:15px;">🐦</span>
+          <span style="font-weight:bold;">X / Twitter</span>
+          <span style="font-size:10px;opacity:.65;margin-left:auto;">@PO_ET9</span>
+        </a>
+        <a class="sbtn" href="https://wa.me/966552465989" target="_blank" rel="noopener">
+          <span style="font-size:15px;">💬</span>
+          <span style="font-weight:bold;">WhatsApp</span>
+          <span style="font-size:10px;opacity:.65;margin-left:auto;">+966 55 246 5989</span>
+        </a>
+        <a class="sbtn" href="/cdn-cgi/l/email-protection#b0dfdfd1dcc3d8d1ddddd1c2d981f0d7ddd1d9dc9ed3dfdd">
+          <span style="font-size:15px;">📧</span>
+          <span style="font-weight:bold;">Email</span>
+          <span style="font-size:10px;opacity:.65;margin-left:auto;"><span class="__cf_email__" data-cfemail="2f40404e435c474e42424e5d461e6f48424e4643014c4042">[email&#160;protected]</span></span>
+        </a>
+        <a class="sbtn" href="tel:+966552465989">
+          <span style="font-size:15px;">📞</span>
+          <span style="font-weight:bold;">Phone</span>
+          <span style="font-size:10px;opacity:.65;margin-left:auto;">+966 55 246 5989</span>
+        </a>
+      </div>
+
+      <hr class="wd">
+      <div class="sh">SEND MESSAGE</div>
+      <table style="width:100%;font-size:12px;margin-bottom:6px;">
+        <tr>
+          <td style="color:var(--darker);white-space:nowrap;padding-bottom:5px;width:45px;">To:</td>
+          <td style="padding-bottom:5px;"><div class="box3d" style="background:#c8c8ff;padding:2px 6px;font-size:12px;color:#000;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="08676769647b60696565697a6139486f65696164266b6765">[email&#160;protected]</a></div></td>
+        </tr>
+        <tr>
+          <td style="color:var(--darker);padding-bottom:5px;">From:</td>
+          <td style="padding-bottom:5px;"><input class="winput" type="email" placeholder="your@email.com" style="margin:0;" id="femail"></td>
+        </tr>
+        <tr>
+          <td style="color:var(--darker);padding-bottom:5px;">Subj:</td>
+          <td style="padding-bottom:5px;"><input class="winput" type="text" placeholder="Project Inquiry..." style="margin:0;" id="fsubj"></td>
+        </tr>
+      </table>
+      <hr class="wd">
+      <textarea class="winput" id="fmsg" placeholder="اكتب رسالتك هنا...&#10;Write your message here..."></textarea>
+      <div style="background:var(--light);padding:5px 8px;border-top:1px solid var(--dark);font-size:11px;color:var(--darker);">📎 No Attachment &nbsp;|&nbsp; Priority: Normal</div>
+      <div style="display:flex;gap:6px;justify-content:flex-end;margin-top:8px;">
+        <button class="wbig" onclick="sendMsg()">📤 Send</button>
+        <button class="wbig" onclick="closeWin('wc')">Cancel</button>
+        <button class="wbig">💾 Draft</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /desktop -->
+
+<!-- START MENU -->
+<div id="startmenu">
+  <div class="sm-sidebar"><span>Omar Portfolio</span></div>
+  <div class="sm-items">
+    <div class="sm-item" onclick="openWin('wm');closeStart()"><span class="sm-icon">🖥</span> Main Portfolio</div>
+    <div class="sm-item" onclick="openWin('wa');closeStart()"><span class="sm-icon">👤</span> About Me</div>
+    <div class="sm-item" onclick="openWin('wsk');closeStart()"><span class="sm-icon">⚡</span> Skills</div>
+    <div class="sm-item" onclick="openWin('wp');closeStart()"><span class="sm-icon">📁</span> Projects</div>
+    <div class="sm-item" onclick="openWin('wc');closeStart()"><span class="sm-icon">📧</span> Contact</div>
+    <div class="sm-divider"></div>
+    <div class="sm-item" onclick="showDlg('info');closeStart()"><span class="sm-icon">ℹ️</span> About Page</div>
+    <div class="sm-divider"></div>
+    <div class="sm-item" onclick="closeStart()"><span class="sm-icon">🔴</span> Close Menu</div>
+  </div>
+</div>
+
+<!-- TASKBAR -->
+<div class="taskbar">
+  <button class="start-btn" id="startbtn" onclick="toggleStart()">
+    <div class="wls"><span></span><span></span><span></span><span></span></div>
+    Start
+  </button>
+  <div class="tbsep"></div>
+  <div class="tbitems" id="tbitems"></div>
+  <div class="tbclock" id="tbclock">00:00</div>
+</div>
+
+<!-- DIALOG -->
+<div id="dlg">
+  <div class="dlgbox">
+    <div class="tb"><div class="tbl" id="dtitle"><span>ℹ Info</span></div><div class="tbr"><div class="wbtn x" onclick="hideDlg()">✕</div></div></div>
+    <div class="dlgb"><div class="dlgic" id="dicon">ℹ️</div><div class="dlgtx" id="dtxt">...</div></div>
+    <div class="dlgft"><button class="wbig" onclick="hideDlg()" style="min-width:70px;">OK</button></div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const DLGS = {
+  info:{ icon:'ℹ️', title:'ℹ About This Portfolio', txt:'حياكم الله! هذا البورتفوليو يعطي نبذة عني.<br><br>مصمم بأسلوب Windows 95  عشان نرجع للماضي شوي .<br><br>• اضغط مرتين على أيقونات سطح المكتب عشان تفتح النوافذ<br>• اسحب النوافذ للتحريك<br>• كليك يمين على سطح المكتب لقائمة خيارات' },
+  sent:{ icon:'✅', title:'✅ Message Sent', txt:'تم إرسال رسالتك بنجاح!<br><br>سيتواصل معك عمر خلال 24 ساعة.<br><br>شكراً لتواصلك 🙏' },
+  p1:{ icon:'🔐', title:'Security Scanner — Details', txt:'أداة منع تسريب بيانات متكاملة:<br>• Data Exfiltration<br>• Unauthorized Data Transfer<br>• Screen Capture Leakage<br>• USB Data Copying<br>• Insider Threat Activities' },
+  p2:{ icon:'🌐', title:'Portfolio Website — Details', txt:'موقع بورتفوليو شخصي:<br>• تصميم متجاوب 100%<br>• CSS Animation خالص<br>• Zero Dependencies<br>• Lighthouse 98+' },
+  p3:{ icon:'📡', title:'Network Monitor — Details', txt:'لوحة مراقبة شبكة:<br>• Live traffic visualization<br>• Device fingerprinting<br>• Anomaly detection<br>• Real-time WebSocket updates' },
+  p4:{ icon:'🛒', title:'E-Commerce App — Details', txt:'تطبيق تجارة إلكترونية:<br>• JWT Authentication<br>• Role-based Access Control<br>• Payment Integration<br>• Admin Dashboard' }
+};
+
+function showDlg(t){ const d=DLGS[t]; if(!d)return; document.getElementById('dtitle').innerHTML='<span>'+d.title+'</span>'; document.getElementById('dicon').textContent=d.icon; document.getElementById('dtxt').innerHTML=d.txt; document.getElementById('dlg').classList.add('show'); }
+function hideDlg(){ document.getElementById('dlg').classList.remove('show'); }
+document.getElementById('dlg').addEventListener('click',function(e){ if(e.target===this)hideDlg(); });
+
+// WINDOW MANAGER
+let zTop=200;
+const ST={};
+const WI={ wm:{l:'🖥 Portfolio'}, wa:{l:'👤 About Me'}, wsk:{l:'⚡ Skills'}, wp:{l:'📁 Projects'}, wc:{l:'📧 Contact'} };
+
+function openWin(id){
+  const el=document.getElementById(id); if(!el)return;
+  el.classList.remove('hidden'); el.classList.add('show');
+  el.style.zIndex=++zTop; ST[id]={open:true,min:false};
+  // fix offscreen
+  setTimeout(()=>{
+    const r=el.getBoundingClientRect();
+    if(r.right>window.innerWidth-4){ el.style.right='auto'; el.style.left=Math.max(4,window.innerWidth-el.offsetWidth-10)+'px'; }
+    if(r.bottom>window.innerHeight-50){ el.style.bottom='auto'; el.style.top=Math.max(4,window.innerHeight-el.offsetHeight-54)+'px'; }
+    if(r.left<4){ el.style.left='4px'; el.style.right='auto'; }
+    if(r.top<0){ el.style.top='4px'; el.style.bottom='auto'; }
+  },10);
+  renderTB();
+}
+function closeWin(id){ const el=document.getElementById(id); if(!el)return; el.classList.add('hidden'); el.classList.remove('show'); ST[id]={open:false,min:false}; renderTB(); }
+function minWin(id){ const el=document.getElementById(id); if(!el)return; el.classList.add('hidden'); el.classList.remove('show'); ST[id]={open:true,min:true}; renderTB(); }
+
+function renderTB(){
+  const c=document.getElementById('tbitems'); c.innerHTML='';
+  Object.entries(ST).forEach(([id,s])=>{
+    if(!s.open)return;
+    const b=document.createElement('div');
+    b.className='tbi'+(s.min?'':' act');
+    b.textContent=WI[id]?.l||id;
+    b.onclick=()=>{ const el=document.getElementById(id); if(s.min){ el.classList.remove('hidden'); el.classList.add('show'); el.style.zIndex=++zTop; s.min=false; } else { el.style.zIndex=++zTop; } renderTB(); };
+    c.appendChild(b);
+  });
+}
+
+// raise on mousedown
+Object.keys(WI).forEach(id=>{ const el=document.getElementById(id); if(el)el.addEventListener('mousedown',()=>{ el.style.zIndex=++zTop; }); });
+
+// CLOCK
+function tick(){ const n=new Date(); const t=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0'); document.getElementById('tbclock').textContent=t; const wc=document.getElementById('wclock'); if(wc)wc.textContent=t; }
+tick(); setInterval(tick,1000);
+
+// DRAG
+let drag=null,off={x:0,y:0};
+function dStart(e,id){ if(e.target.classList.contains('wbtn'))return; drag=document.getElementById(id); drag.style.zIndex=++zTop; const r=drag.getBoundingClientRect(); off={x:e.clientX-r.left,y:e.clientY-r.top}; e.preventDefault(); }
+function dStartT(e,id){ if(e.target.classList.contains('wbtn'))return; drag=document.getElementById(id); drag.style.zIndex=++zTop; const r=drag.getBoundingClientRect(); const t=e.touches[0]; off={x:t.clientX-r.left,y:t.clientY-r.top}; }
+function mv(cx,cy){ if(!drag)return; let x=cx-off.x,y=cy-off.y; x=Math.max(0,Math.min(x,window.innerWidth-drag.offsetWidth)); y=Math.max(0,Math.min(y,window.innerHeight-drag.offsetHeight-46)); drag.style.left=x+'px'; drag.style.right='auto'; drag.style.top=y+'px'; drag.style.bottom='auto'; drag.style.transform='none'; }
+document.addEventListener('mousemove',e=>mv(e.clientX,e.clientY));
+document.addEventListener('mouseup',()=>drag=null);
+document.addEventListener('touchmove',e=>{ if(drag){mv(e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();} },{passive:false});
+document.addEventListener('touchend',()=>drag=null);
+
+// CONTEXT MENU
+const ctx=document.getElementById('ctx');
+document.getElementById('desk').addEventListener('contextmenu',e=>{ if(e.target.closest('.win'))return; e.preventDefault(); let x=e.clientX,y=e.clientY; if(x+180>window.innerWidth)x=window.innerWidth-185; if(y+220>window.innerHeight)y=window.innerHeight-225; ctx.style.left=x+'px'; ctx.style.top=y+'px'; ctx.classList.add('show'); });
+document.addEventListener('click',()=>ctx.classList.remove('show'));
+
+// START MENU
+function toggleStart(){
+  const m=document.getElementById('startmenu');
+  const b=document.getElementById('startbtn');
+  const isShown=m.classList.toggle('show');
+  if(isShown){
+    b.style.borderTop='2px solid var(--darker)';
+    b.style.borderLeft='2px solid var(--darker)';
+    b.style.borderRight='2px solid var(--white)';
+    b.style.borderBottom='2px solid var(--white)';
+  } else {
+    b.style.borderTop=''; b.style.borderLeft=''; b.style.borderRight=''; b.style.borderBottom='';
+  }
+}
+function closeStart(){
+  const m=document.getElementById('startmenu');
+  const b=document.getElementById('startbtn');
+  m.classList.remove('show');
+  b.style.borderTop=''; b.style.borderLeft=''; b.style.borderRight=''; b.style.borderBottom='';
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#startmenu')&&!e.target.closest('#startbtn'))closeStart();
+});
+
+
+function sendMsg(){ const e=document.getElementById('femail').value; const s=document.getElementById('fsubj').value; const m=document.getElementById('fmsg').value; if(!e||!m){ showDlg('err')||alert('Please fill email and message'); return; } const ml='mailto:ooalshammari1@gmail.com?subject='+encodeURIComponent(s||'Portfolio Inquiry')+'&body='+encodeURIComponent(m+'\n\nFrom: '+e); window.location.href=ml; showDlg('sent'); }
+
+// SPLASH
+const msgs=['Loading system components...','Initializing user profile...','Mounting project drives...','Starting Windows Explorer...','Almost ready...'];
+let prog=0;
+let progInt = setInterval(()=>{
+  prog += Math.random()*18;
+
+  if(prog >= 100){
+    prog = 100;
+    document.getElementById('lbar').style.width = prog + '%';
+    document.getElementById('lmsg').textContent = 'Welcome Omar...';
+
+    clearInterval(progInt);
+
+    setTimeout(()=>{
+      document.getElementById('splash').classList.add('out');
+      setTimeout(()=>{
+        document.getElementById('splash').style.display='none';
+        openWin('wm');
+      },800);
+    },500);
+
+    return;
+  }
+
+  document.getElementById('lbar').style.width = prog + '%';
+
+  const i = Math.floor((prog/100) * msgs.length);
+  document.getElementById('lmsg').textContent = msgs[i] || msgs[msgs.length-1];
+
+}, 350);
+</script>
+</body>
+</html>
