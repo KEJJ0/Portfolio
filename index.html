@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Omar Al-Shammari — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
@@ -79,7 +80,7 @@ body::before { content:''; position:fixed; inset:0; background:repeating-linear-
 .tb { background:linear-gradient(to right,#000080,#1084d0); color:white; padding:3px 5px; display:flex; align-items:center; justify-content:space-between; font-size:12px; font-weight:bold; cursor:move; min-height:22px; font-family:'Share Tech Mono',monospace; user-select:none; }
 .tbl { display:flex; align-items:center; gap:5px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
 .tbr { display:flex; gap:2px; flex-shrink:0; }
-.wbtn { width:16px; height:14px; background:var(--gray); border-top:1px solid var(--white); border-left:1px solid var(--white); border-right:1px solid var(--darker); border-bottom:1px solid var(--darker); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--black); font-family:monospace; }
+.wbtn { width:16px; height:14px; background:var(--gray); border-top:1px solid var(--white); border-left:1px solid var(--darker); border-right:1px solid var(--darker); border-bottom:1px solid var(--darker); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--black); font-family:monospace; }
 .wbtn:hover { background:#e0e0e0; }
 .wbtn:active { border-top:1px solid var(--darker); border-left:1px solid var(--darker); border-right:1px solid var(--white); border-bottom:1px solid var(--white); }
 .wbtn.x:hover { background:#cc0000; color:white; }
@@ -287,7 +288,6 @@ textarea.winput { min-height:75px; resize:vertical; }
 </head>
 <body>
 
-<!-- SPLASH -->
 <div id="splash">
   <div class="wlogo"><span></span><span></span><span></span><span></span></div>
   <div class="sp-title">Omar Al-Shammari<br><span style="font-size:.55em;color:#88bbff;">Portfolio v1.0</span></div>
@@ -297,24 +297,20 @@ textarea.winput { min-height:75px; resize:vertical; }
   <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#5566bb;margin-top:4px;">Copyright © 2025 Omar Al-Shammari</div>
 </div>
 
-<!-- CONTEXT MENU -->
 <div id="ctx">
-  <div class="ci" onclick="openWin('wm')">🖥 Main Portfolio</div>
-  <div class="ci" onclick="openWin('wa')">👤 About Me</div>
-  <div class="ci" onclick="openWin('wsk')">⚡ Skills</div>
-  <div class="ci" onclick="openWin('wp')">📁 Projects</div>
-  <div class="ci" onclick="openWin('wc')">📧 Contact</div>
+  <div class="ci" onclick="openWin('wm')"><i class="fa-solid fa-desktop"></i> Main Portfolio</div>
+  <div class="ci" onclick="openWin('wa')"><i class="fa-solid fa-user"></i> About Me</div>
+  <div class="ci" onclick="openWin('wsk')"><i class="fa-solid fa-bolt"></i> Skills</div>
+  <div class="ci" onclick="openWin('wp')"><i class="fa-solid fa-folder"></i> Projects</div>
+  <div class="ci" onclick="openWin('wc')"><i class="fa-solid fa-envelope"></i> Contact</div>
   <div class="cd"></div>
-  <div class="ci" onclick="showDlg('info')">ℹ️ About This Page</div>
+  <div class="ci" onclick="showDlg('info')"><i class="fa-solid fa-circle-info"></i> About This Page</div>
 </div>
 
-<!-- DESKTOP -->
 <div class="desktop" id="desk">
 
-  <!-- Icons -->
   <div class="icons-col">
 
-    <!-- About Me — purple person (matches screenshot) -->
     <div class="dicon" ondblclick="openWin('wa')">
       <div class="dic-wrap dic-purple">
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -325,7 +321,6 @@ textarea.winput { min-height:75px; resize:vertical; }
       <div class="dlabel">About Me</div>
     </div>
 
-    <!-- Skills — orange/yellow lightning (matches screenshot) -->
     <div class="dicon" ondblclick="openWin('wsk')">
       <div class="dic-wrap dic-orange">
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -335,7 +330,6 @@ textarea.winput { min-height:75px; resize:vertical; }
       <div class="dlabel">Skills.exe</div>
     </div>
 
-    <!-- Projects — yellow folder (matches screenshot) -->
     <div class="dicon" ondblclick="openWin('wp')">
       <div class="dic-wrap dic-yellow">
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -348,7 +342,6 @@ textarea.winput { min-height:75px; resize:vertical; }
       <div class="dlabel">My Projects</div>
     </div>
 
-    <!-- Contact — pink @ (matches screenshot) -->
     <div class="dicon" ondblclick="openWin('wc')">
       <div class="dic-wrap dic-pink">
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -360,7 +353,6 @@ textarea.winput { min-height:75px; resize:vertical; }
       <div class="dlabel">Contact</div>
     </div>
 
-    <!-- Read Me — blue info (matches screenshot) -->
     <div class="dicon" ondblclick="showDlg('info')">
       <div class="dic-wrap dic-blue">
         <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -374,10 +366,9 @@ textarea.winput { min-height:75px; resize:vertical; }
 
   </div>
 
-  <!-- ══ MAIN WINDOW ══ -->
   <div class="win hidden" id="wm" style="z-index:100;">
     <div class="tb" onmousedown="dStart(event,'wm')" ontouchstart="dStartT(event,'wm')">
-      <div class="tbl"><span>🖥</span><span>My Portfolio — Omar Al-Shammari</span></div>
+      <div class="tbl"><span><i class="fa-solid fa-desktop"></i></span><span>My Portfolio — Omar Al-Shammari</span></div>
       <div class="tbr">
         <div class="wbtn" onclick="minWin('wm')">_</div>
         <div class="wbtn">□</div>
@@ -392,26 +383,26 @@ textarea.winput { min-height:75px; resize:vertical; }
       <div class="mi" onclick="showDlg('info')">Help</div>
     </div>
     <div class="mqw">
-      <span class="mqi">★ مرحباً — Omar Al-Shammari ★  أمن سيبراني ومطور ويب ★ Cybersecurity  & Web Developer ★ Available for Opportunities ★ Saudi Arabia 🇸🇦 ★</span>
+      <span class="mqi">★ مرحباً — Omar Al-Shammari ★  أمن سيبراني ومطور ويب ★ Cybersecurity  & Web Developer ★ Available for Opportunities ★ Saudi Arabia <i class="fa-solid fa-flag"></i> ★</span>
     </div>
     <div class="wc" style="max-height:58vh;">
       <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;">
         <div class="pxav-img">
-          <img src=Images/Me.png alt="Omar Al-Shammari" style="width:100%;height:100%;object-fit:cover;">
+          <img src="Images/Me.png" alt="Omar Al-Shammari" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="flex:1;min-width:200px;">
           <div style="font-family:'Press Start 2P',monospace;font-size:clamp(8px,1.8vw,12px);color:var(--black);margin-bottom:8px;line-height:1.8;">Omar Al-Shammari<span class="blink">_</span></div>
           <div style="font-size:12px;color:var(--darker);line-height:2.1;">
-            <div>🎓 Cybersecurity Student</div>
-            <div>💻 Web Developer</div>
-            <div>📍 Saudi Arabia 🇸🇦</div>
+            <div><i class="fa-solid fa-graduation-cap"></i> Cybersecurity Student</div>
+            <div><i class="fa-solid fa-laptop-code"></i> Web Developer</div>
+            <div><i class="fa-solid fa-location-dot"></i> Saudi Arabia <i class="fa-solid fa-flag"></i></div>
             <div style="color:#008000;font-weight:bold;">● Available for Work</div>
           </div>
           <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
-            <button class="wbig" onclick="openWin('wa')">👤 About</button>
-            <button class="wbig" onclick="openWin('wsk')">⚡ Skills</button>
-            <button class="wbig" onclick="openWin('wp')">📁 Projects</button>
-            <button class="wbig" onclick="openWin('wc')">📧 Contact</button>
+            <button class="wbig" onclick="openWin('wa')"><i class="fa-solid fa-user"></i> About</button>
+            <button class="wbig" onclick="openWin('wsk')"><i class="fa-solid fa-bolt"></i> Skills</button>
+            <button class="wbig" onclick="openWin('wp')"><i class="fa-solid fa-folder"></i> Projects</button>
+            <button class="wbig" onclick="openWin('wc')"><i class="fa-solid fa-envelope"></i> Contact</button>
           </div>
         </div>
       </div>
@@ -428,7 +419,7 @@ textarea.winput { min-height:75px; resize:vertical; }
           <div style="font-size:10px;color:var(--darker);">Projects</div>
         </div>
         <div class="box3d" style="padding:8px;text-align:center;background:var(--gray);">
-          <div style="font-family:'Press Start 2P',monospace;font-size:14px;color:#000080;">🔐</div>
+          <div style="font-family:'Press Start 2P',monospace;font-size:14px;color:#000080;"><i class="fa-solid fa-lock"></i></div>
           <div style="font-size:10px;color:var(--darker);">CyberSec</div>
         </div>
         <div class="box3d" style="padding:8px;text-align:center;background:var(--gray);">
@@ -436,15 +427,14 @@ textarea.winput { min-height:75px; resize:vertical; }
           <div style="font-size:10px;color:var(--darker);">Passion</div>
         </div>
       </div>
-
       <hr class="wd">
       <div class="sh">QUICK LINKS</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <a class="wbig" href="https://www.linkedin.com/in/omar-mohammed-20b4772b8" target="_blank" rel="noopener">🔵 LinkedIn</a>
-        <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener">🐙 GitHub</a>
-        <a class="wbig" href="https://x.com/PO_ET9" target="_blank" rel="noopener">🐦 X / Twitter</a>
-        <a class="wbig" href="/cdn-cgi/l/email-protection#e9868688859a81888484889b80d8a98e84888085c78a8684">📧 Email</a>
-        <a class="wbig" href="https://wa.me/966552465989" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a class="wbig" href="https://www.linkedin.com/in/omar-mohammed-20b4772b8" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" style="color: #0077b5;"></i> LinkedIn</a>
+        <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a class="wbig" href="https://x.com/PO_ET9" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i> X / Twitter</a>
+        <a class="wbig" href="/cdn-cgi/l/email-protection#e9868688859a81888484889b80d8a98e84888085c78a8684"><i class="fa-solid fa-envelope" style="color: #D44638;"></i> Email</a>
+        <a class="wbig" href="https://wa.me/966552465989" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp</a>
       </div>
     </div>
     <div class="sbar">
@@ -454,10 +444,9 @@ textarea.winput { min-height:75px; resize:vertical; }
     </div>
   </div>
 
-  <!-- ══ ABOUT WINDOW ══ -->
   <div class="win hidden" id="wa" style="z-index:99;">
     <div class="tb" onmousedown="dStart(event,'wa')" ontouchstart="dStartT(event,'wa')">
-      <div class="tbl"><span>👤</span><span>About Me — User Profile</span></div>
+      <div class="tbl"><span><i class="fa-solid fa-user"></i></span><span>About Me — User Profile</span></div>
       <div class="tbr">
         <div class="wbtn" onclick="minWin('wa')">_</div>
         <div class="wbtn">□</div>
@@ -475,7 +464,7 @@ textarea.winput { min-height:75px; resize:vertical; }
       <div class="sh">PROPERTIES</div>
       <table style="width:100%;font-size:12px;border-collapse:collapse;">
         <tr><td style="padding:5px 8px;color:var(--darker);width:42%;">Name:</td><td style="padding:5px 8px;color:#000;">Omar Al-Shammari</td></tr>
-        <tr style="background:#e8e8e8;"><td style="padding:5px 8px;color:var(--darker);">Location:</td><td style="padding:5px 8px;color:#000;">Saudi Arabia 🇸🇦</td></tr>
+        <tr style="background:#e8e8e8;"><td style="padding:5px 8px;color:var(--darker);">Location:</td><td style="padding:5px 8px;color:#000;">Saudi Arabia <i class="fa-solid fa-flag"></i></td></tr>
         <tr><td style="padding:5px 8px;color:var(--darker);">Major:</td><td style="padding:5px 8px;color:#000;">Cybersecurity</td></tr>
         <tr style="background:#e8e8e8;"><td style="padding:5px 8px;color:var(--darker);">Skill:</td><td style="padding:5px 8px;color:#000;">Web Development</td></tr>
         <tr><td style="padding:5px 8px;color:var(--darker);">Email:</td><td style="padding:5px 8px;"><a href="/cdn-cgi/l/email-protection#bad5d5dbd6c9d2dbd7d7dbc8d38bfaddd7dbd3d694d9d5d7" style="color:#000080;text-decoration:none;"><span class="__cf_email__" data-cfemail="d8b7b7b9b4abb0b9b5b5b9aab1e998bfb5b9b1b4f6bbb7b5">[email&#160;protected]</span></a></td></tr>
@@ -484,16 +473,15 @@ textarea.winput { min-height:75px; resize:vertical; }
       </table>
 
       <div style="margin-top:14px;display:flex;gap:6px;justify-content:flex-end;">
-        <button class="wbig" onclick="openWin('wc')">📧 Hire Me</button>
+        <button class="wbig" onclick="openWin('wc')"><i class="fa-solid fa-envelope"></i> Hire Me</button>
         <button class="wbig" onclick="closeWin('wa')">OK</button>
       </div>
     </div>
   </div>
 
-  <!-- ══ SKILLS WINDOW ══ -->
   <div class="win hidden" id="wsk" style="z-index:98;">
     <div class="tb" onmousedown="dStart(event,'wsk')" ontouchstart="dStartT(event,'wsk')">
-      <div class="tbl"><span>⚡</span><span>Skills.exe — Capability Manager</span></div>
+      <div class="tbl"><span><i class="fa-solid fa-bolt"></i></span><span>Skills.exe — Capability Manager</span></div>
       <div class="tbr">
         <div class="wbtn" onclick="minWin('wsk')">_</div>
         <div class="wbtn">□</div>
@@ -533,10 +521,9 @@ textarea.winput { min-height:75px; resize:vertical; }
     <div class="sbar"><div class="sp">10 skills loaded</div><div class="sp">All systems OK</div></div>
   </div>
 
-  <!-- ══ PROJECTS WINDOW ══ -->
   <div class="win hidden" id="wp" style="z-index:97;">
     <div class="tb" onmousedown="dStart(event,'wp')" ontouchstart="dStartT(event,'wp')">
-      <div class="tbl"><span>📁</span><span>My Projects — File Explorer</span></div>
+      <div class="tbl"><span><i class="fa-solid fa-folder"></i></span><span>My Projects — File Explorer</span></div>
       <div class="tbr">
         <div class="wbtn" onclick="minWin('wp')">_</div>
         <div class="wbtn">□</div>
@@ -552,46 +539,46 @@ textarea.winput { min-height:75px; resize:vertical; }
     </div>
     <div class="wc" style="max-height:55vh;">
       <div class="proj">
-        <div class="pjh">🔐 Data Loss Prevention (حصين)</div>
+        <div class="pjh"><i class="fa-solid fa-lock"></i> Data Loss Prevention (حصين)</div>
         <div class="pjb">
           <p>تطبيق لمنع فقدان البيانات من خلال كشف الأنظمة والتنبيهات التلقائية.</p>
           <div class="tags"><span class="tag">Python</span><span class="tag">Fingerprinting / Exact Data Matching</span><span class="tag">C#</span><span class="tag">Data Classification</span> <span class="tag">Endpoint Protection</span></div>
           <div style="margin-top:8px;display:flex;gap:6px;">
-            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;">🐙 GitHub</a>
-            <button class="wbig" onclick="showDlg('p1')" style="font-size:10px;padding:3px 8px;">📄 Details</button>
+            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;"><i class="fa-brands fa-github"></i> GitHub</a>
+            <button class="wbig" onclick="showDlg('p1')" style="font-size:10px;padding:3px 8px;"><i class="fa-solid fa-file-lines"></i> Details</button>
           </div>
         </div>
       </div>
       <div class="proj">
-        <div class="pjh">🌐 Portfolio Website</div>
+        <div class="pjh"><i class="fa-solid fa-globe"></i> Portfolio Website</div>
         <div class="pjb">
           <p>موقع بورتفوليو شخصي تفاعلي متجاوب مبني بـ HTML وCSS وJS خالص بدون أي framework.</p>
           <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
           <div style="margin-top:8px;display:flex;gap:6px;">
-            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;">🐙 GitHub</a>
-            <button class="wbig" onclick="showDlg('p2')" style="font-size:10px;padding:3px 8px;">📄 Details</button>
+            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;"><i class="fa-brands fa-github"></i> GitHub</a>
+            <button class="wbig" onclick="showDlg('p2')" style="font-size:10px;padding:3px 8px;"><i class="fa-solid fa-file-lines"></i> Details</button>
           </div>
         </div>
       </div>
       <div class="proj">
-        <div class="pjh">📡 Network Monitoring Dashboard</div>
+        <div class="pjh"><i class="fa-solid fa-satellite-dish"></i> Network Monitoring Dashboard</div>
         <div class="pjb">
           <p>لوحة مراقبة حركة الشبكة في الوقت الفعلي مع كشف الأجهزة وتحليل البروتوكولات والتنبيهات.</p>
           <div class="tags"><span class="tag">Python</span><span class="tag">React</span><span class="tag">WebSocket</span><span class="tag">Wireshark</span></div>
           <div style="margin-top:8px;display:flex;gap:6px;">
-            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;">🐙 GitHub</a>
-            <button class="wbig" onclick="showDlg('p3')" style="font-size:10px;padding:3px 8px;">📄 Details</button>
+            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;"><i class="fa-brands fa-github"></i> GitHub</a>
+            <button class="wbig" onclick="showDlg('p3')" style="font-size:10px;padding:3px 8px;"><i class="fa-solid fa-file-lines"></i> Details</button>
           </div>
         </div>
       </div>
       <div class="proj">
-        <div class="pjh">🛒 E-Commerce Web App</div>
+        <div class="pjh"><i class="fa-solid fa-cart-shopping"></i> E-Commerce Web App</div>
         <div class="pjb">
           <p>تطبيق تجارة إلكترونية متكامل بنظام مصادقة JWT وإدارة المنتجات وسلة التسوق وبوابة الدفع.</p>
           <div class="tags"><span class="tag">Node.js</span><span class="tag">React</span><span class="tag">MongoDB</span><span class="tag">JWT</span></div>
           <div style="margin-top:8px;display:flex;gap:6px;">
-            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;">🐙 GitHub</a>
-            <button class="wbig" onclick="showDlg('p4')" style="font-size:10px;padding:3px 8px;">📄 Details</button>
+            <a class="wbig" href="https://github.com/KEJJ0" target="_blank" rel="noopener" style="font-size:10px;padding:3px 8px;"><i class="fa-brands fa-github"></i> GitHub</a>
+            <button class="wbig" onclick="showDlg('p4')" style="font-size:10px;padding:3px 8px;"><i class="fa-solid fa-file-lines"></i> Details</button>
           </div>
         </div>
       </div>
@@ -599,10 +586,9 @@ textarea.winput { min-height:75px; resize:vertical; }
     <div class="sbar"><div class="sp">4 object(s)</div><div class="sp">C:\Users\Omar\Projects</div></div>
   </div>
 
-  <!-- ══ CONTACT WINDOW ══ -->
   <div class="win hidden" id="wc" style="z-index:96;">
     <div class="tb" onmousedown="dStart(event,'wc')" ontouchstart="dStartT(event,'wc')">
-      <div class="tbl"><span>📧</span><span>Contact — Omar Al-Shammari</span></div>
+      <div class="tbl"><span><i class="fa-solid fa-envelope"></i></span><span>Contact — Omar Al-Shammari</span></div>
       <div class="tbr">
         <div class="wbtn" onclick="minWin('wc')">_</div>
         <div class="wbtn">□</div>
@@ -614,32 +600,32 @@ textarea.winput { min-height:75px; resize:vertical; }
       <div class="sh">SOCIAL LINKS</div>
       <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
         <a class="sbtn" href="https://www.linkedin.com/in/omar-mohammed-20b4772b8" target="_blank" rel="noopener">
-          <span style="font-size:15px;">🔵</span>
+          <span style="font-size:15px;"><i class="fa-brands fa-linkedin" style="color: #0077b5;"></i></span>
           <span style="font-weight:bold;">LinkedIn</span>
           <span style="font-size:10px;opacity:.65;margin-left:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">omar-mohammed-20b4772b8</span>
         </a>
         <a class="sbtn" href="https://github.com/KEJJ0" target="_blank" rel="noopener">
-          <span style="font-size:15px;">🐙</span>
+          <span style="font-size:15px;"><i class="fa-brands fa-github"></i></span>
           <span style="font-weight:bold;">GitHub</span>
           <span style="font-size:10px;opacity:.65;margin-left:auto;">github.com/KEJJ0</span>
         </a>
         <a class="sbtn" href="https://x.com/PO_ET9" target="_blank" rel="noopener">
-          <span style="font-size:15px;">🐦</span>
+          <span style="font-size:15px;"><i class="fa-brands fa-x-twitter"></i></span>
           <span style="font-weight:bold;">X / Twitter</span>
           <span style="font-size:10px;opacity:.65;margin-left:auto;">@PO_ET9</span>
         </a>
         <a class="sbtn" href="https://wa.me/966552465989" target="_blank" rel="noopener">
-          <span style="font-size:15px;">💬</span>
+          <span style="font-size:15px;"><i class="fa-brands fa-whatsapp" style="color: #25D366;"></i></span>
           <span style="font-weight:bold;">WhatsApp</span>
           <span style="font-size:10px;opacity:.65;margin-left:auto;">+966 55 246 5989</span>
         </a>
         <a class="sbtn" href="/cdn-cgi/l/email-protection#b0dfdfd1dcc3d8d1ddddd1c2d981f0d7ddd1d9dc9ed3dfdd">
-          <span style="font-size:15px;">📧</span>
+          <span style="font-size:15px;"><i class="fa-solid fa-envelope" style="color: #D44638;"></i></span>
           <span style="font-weight:bold;">Email</span>
           <span style="font-size:10px;opacity:.65;margin-left:auto;"><span class="__cf_email__" data-cfemail="2f40404e435c474e42424e5d461e6f48424e4643014c4042">[email&#160;protected]</span></span>
         </a>
         <a class="sbtn" href="tel:+966552465989">
-          <span style="font-size:15px;">📞</span>
+          <span style="font-size:15px;"><i class="fa-solid fa-phone" style="color: #008000;"></i></span>
           <span style="font-weight:bold;">Phone</span>
           <span style="font-size:10px;opacity:.65;margin-left:auto;">+966 55 246 5989</span>
         </a>
@@ -663,34 +649,30 @@ textarea.winput { min-height:75px; resize:vertical; }
       </table>
       <hr class="wd">
       <textarea class="winput" id="fmsg" placeholder="اكتب رسالتك هنا...&#10;Write your message here..."></textarea>
-      <div style="background:var(--light);padding:5px 8px;border-top:1px solid var(--dark);font-size:11px;color:var(--darker);">📎 No Attachment &nbsp;|&nbsp; Priority: Normal</div>
+      <div style="background:var(--light);padding:5px 8px;border-top:1px solid var(--dark);font-size:11px;color:var(--darker);"><i class="fa-solid fa-paperclip"></i> No Attachment &nbsp;|&nbsp; Priority: Normal</div>
       <div style="display:flex;gap:6px;justify-content:flex-end;margin-top:8px;">
-        <button class="wbig" onclick="sendMsg()">📤 Send</button>
+        <button class="wbig" onclick="sendMsg()"><i class="fa-solid fa-paper-plane"></i> Send</button>
         <button class="wbig" onclick="closeWin('wc')">Cancel</button>
-        <button class="wbig">💾 Draft</button>
+        <button class="wbig"><i class="fa-solid fa-floppy-disk"></i> Draft</button>
       </div>
     </div>
   </div>
 
-</div><!-- /desktop -->
-
-<!-- START MENU -->
-<div id="startmenu">
+</div><div id="startmenu">
   <div class="sm-sidebar"><span>Omar Portfolio</span></div>
   <div class="sm-items">
-    <div class="sm-item" onclick="openWin('wm');closeStart()"><span class="sm-icon">🖥</span> Main Portfolio</div>
-    <div class="sm-item" onclick="openWin('wa');closeStart()"><span class="sm-icon">👤</span> About Me</div>
-    <div class="sm-item" onclick="openWin('wsk');closeStart()"><span class="sm-icon">⚡</span> Skills</div>
-    <div class="sm-item" onclick="openWin('wp');closeStart()"><span class="sm-icon">📁</span> Projects</div>
-    <div class="sm-item" onclick="openWin('wc');closeStart()"><span class="sm-icon">📧</span> Contact</div>
+    <div class="sm-item" onclick="openWin('wm');closeStart()"><span class="sm-icon"><i class="fa-solid fa-desktop"></i></span> Main Portfolio</div>
+    <div class="sm-item" onclick="openWin('wa');closeStart()"><span class="sm-icon"><i class="fa-solid fa-user"></i></span> About Me</div>
+    <div class="sm-item" onclick="openWin('wsk');closeStart()"><span class="sm-icon"><i class="fa-solid fa-bolt"></i></span> Skills</div>
+    <div class="sm-item" onclick="openWin('wp');closeStart()"><span class="sm-icon"><i class="fa-solid fa-folder"></i></span> Projects</div>
+    <div class="sm-item" onclick="openWin('wc');closeStart()"><span class="sm-icon"><i class="fa-solid fa-envelope"></i></span> Contact</div>
     <div class="sm-divider"></div>
-    <div class="sm-item" onclick="showDlg('info');closeStart()"><span class="sm-icon">ℹ️</span> About Page</div>
+    <div class="sm-item" onclick="showDlg('info');closeStart()"><span class="sm-icon"><i class="fa-solid fa-circle-info"></i></span> About Page</div>
     <div class="sm-divider"></div>
-    <div class="sm-item" onclick="closeStart()"><span class="sm-icon">🔴</span> Close Menu</div>
+    <div class="sm-item" onclick="closeStart()"><span class="sm-icon"><i class="fa-solid fa-circle-xmark" style="color: #cc0000;"></i></span> Close Menu</div>
   </div>
 </div>
 
-<!-- TASKBAR -->
 <div class="taskbar">
   <button class="start-btn" id="startbtn" onclick="toggleStart()">
     <div class="wls"><span></span><span></span><span></span><span></span></div>
@@ -701,33 +683,32 @@ textarea.winput { min-height:75px; resize:vertical; }
   <div class="tbclock" id="tbclock">00:00</div>
 </div>
 
-<!-- DIALOG -->
 <div id="dlg">
   <div class="dlgbox">
-    <div class="tb"><div class="tbl" id="dtitle"><span>ℹ Info</span></div><div class="tbr"><div class="wbtn x" onclick="hideDlg()">✕</div></div></div>
-    <div class="dlgb"><div class="dlgic" id="dicon">ℹ️</div><div class="dlgtx" id="dtxt">...</div></div>
+    <div class="tb"><div class="tbl" id="dtitle"><span><i class="fa-solid fa-circle-info"></i> Info</span></div><div class="tbr"><div class="wbtn x" onclick="hideDlg()">✕</div></div></div>
+    <div class="dlgb"><div class="dlgic" id="dicon"><i class="fa-solid fa-circle-info"></i></div><div class="dlgtx" id="dtxt">...</div></div>
     <div class="dlgft"><button class="wbig" onclick="hideDlg()" style="min-width:70px;">OK</button></div>
   </div>
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const DLGS = {
-  info:{ icon:'ℹ️', title:'ℹ About This Portfolio', txt:'حياكم الله! هذا البورتفوليو يعطي نبذة عني.<br><br>مصمم بأسلوب Windows 95  عشان نرجع للماضي شوي .<br><br>• اضغط مرتين على أيقونات سطح المكتب عشان تفتح النوافذ<br>• اسحب النوافذ للتحريك<br>• كليك يمين على سطح المكتب لقائمة خيارات' },
-  sent:{ icon:'✅', title:'✅ Message Sent', txt:'تم إرسال رسالتك بنجاح!<br><br>سيتواصل معك عمر خلال 24 ساعة.<br><br>شكراً لتواصلك 🙏' },
-  p1:{ icon:'🔐', title:'Security Scanner — Details', txt:'أداة منع تسريب بيانات متكاملة:<br>• Data Exfiltration<br>• Unauthorized Data Transfer<br>• Screen Capture Leakage<br>• USB Data Copying<br>• Insider Threat Activities' },
-  p2:{ icon:'🌐', title:'Portfolio Website — Details', txt:'موقع بورتفوليو شخصي:<br>• تصميم متجاوب 100%<br>• CSS Animation خالص<br>• Zero Dependencies<br>• Lighthouse 98+' },
-  p3:{ icon:'📡', title:'Network Monitor — Details', txt:'لوحة مراقبة شبكة:<br>• Live traffic visualization<br>• Device fingerprinting<br>• Anomaly detection<br>• Real-time WebSocket updates' },
-  p4:{ icon:'🛒', title:'E-Commerce App — Details', txt:'تطبيق تجارة إلكترونية:<br>• JWT Authentication<br>• Role-based Access Control<br>• Payment Integration<br>• Admin Dashboard' }
+  info:{ icon:'<i class="fa-solid fa-circle-info" style="color: #1084d0;"></i>', title:'<i class="fa-solid fa-circle-info"></i> About This Portfolio', txt:'حياكم الله! هذا البورتفوليو يعطي نبذة عني.<br><br>مصمم بأسلوب Windows 95  عشان نرجع للماضي شوي .<br><br>• اضغط مرتين على أيقونات سطح المكتب عشان تفتح النوافذ<br>• اسحب النوافذ للتحريك<br>• كليك يمين على سطح المكتب لقائمة خيارات' },
+  sent:{ icon:'<i class="fa-solid fa-circle-check" style="color: #008000;"></i>', title:'<i class="fa-solid fa-circle-check"></i> Message Sent', txt:'تم إرسال رسالتك بنجاح!<br><br>سيتواصل معك عمر خلال 24 ساعة.<br><br>شكراً لتواصلك <i class="fa-solid fa-hands-praying" style="color: #e0b020;"></i>' },
+  p1:{ icon:'<i class="fa-solid fa-lock" style="color: #d4af37;"></i>', title:'Security Scanner — Details', txt:'أداة منع تسريب بيانات متكاملة:<br>• Data Exfiltration<br>• Unauthorized Data Transfer<br>• Screen Capture Leakage<br>• USB Data Copying<br>• Insider Threat Activities' },
+  p2:{ icon:'<i class="fa-solid fa-globe" style="color: #1084d0;"></i>', title:'Portfolio Website — Details', txt:'موقع بورتفوليو شخصي:<br>• تصميم متجاوب 100%<br>• CSS Animation خالص<br>• Zero Dependencies<br>• Lighthouse 98+' },
+  p3:{ icon:'<i class="fa-solid fa-satellite-dish" style="color: #888;"></i>', title:'Network Monitor — Details', txt:'لوحة مراقبة شبكة:<br>• Live traffic visualization<br>• Device fingerprinting<br>• Anomaly detection<br>• Real-time WebSocket updates' },
+  p4:{ icon:'<i class="fa-solid fa-cart-shopping" style="color: #e0b020;"></i>', title:'E-Commerce App — Details', txt:'تطبيق تجارة إلكترونية:<br>• JWT Authentication<br>• Role-based Access Control<br>• Payment Integration<br>• Admin Dashboard' }
 };
 
-function showDlg(t){ const d=DLGS[t]; if(!d)return; document.getElementById('dtitle').innerHTML='<span>'+d.title+'</span>'; document.getElementById('dicon').textContent=d.icon; document.getElementById('dtxt').innerHTML=d.txt; document.getElementById('dlg').classList.add('show'); }
+function showDlg(t){ const d=DLGS[t]; if(!d)return; document.getElementById('dtitle').innerHTML='<span>'+d.title+'</span>'; document.getElementById('dicon').innerHTML=d.icon; document.getElementById('dtxt').innerHTML=d.txt; document.getElementById('dlg').classList.add('show'); }
 function hideDlg(){ document.getElementById('dlg').classList.remove('show'); }
 document.getElementById('dlg').addEventListener('click',function(e){ if(e.target===this)hideDlg(); });
 
 // WINDOW MANAGER
 let zTop=200;
 const ST={};
-const WI={ wm:{l:'🖥 Portfolio'}, wa:{l:'👤 About Me'}, wsk:{l:'⚡ Skills'}, wp:{l:'📁 Projects'}, wc:{l:'📧 Contact'} };
+const WI={ wm:{l:'<i class="fa-solid fa-desktop"></i> Portfolio'}, wa:{l:'<i class="fa-solid fa-user"></i> About Me'}, wsk:{l:'<i class="fa-solid fa-bolt"></i> Skills'}, wp:{l:'<i class="fa-solid fa-folder"></i> Projects'}, wc:{l:'<i class="fa-solid fa-envelope"></i> Contact'} };
 
 function openWin(id){
   const el=document.getElementById(id); if(!el)return;
@@ -752,7 +733,7 @@ function renderTB(){
     if(!s.open)return;
     const b=document.createElement('div');
     b.className='tbi'+(s.min?'':' act');
-    b.textContent=WI[id]?.l||id;
+    b.innerHTML=WI[id]?.l||id;
     b.onclick=()=>{ const el=document.getElementById(id); if(s.min){ el.classList.remove('hidden'); el.classList.add('show'); el.style.zIndex=++zTop; s.min=false; } else { el.style.zIndex=++zTop; } renderTB(); };
     c.appendChild(b);
   });
